@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/new.css" type="text/css" />
+
+
+	<title>Welcome To Foodie || Index</title>
+</head>
+
+<body class="body">
+
+<div class="dum mousescroll">
+	<div class="navbar  navbar-inverse">
+		<div class="navbar-inner mynavbar">
+			<button type="button" class="btn btn-navbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<div>
+					<ul class="nav"><li class="active"> <a href="http://127.0.0.1:8000/restaurant" class="brand">Foodie</a></li>
+						<li><a href="http://127.0.0.1:8000/restaurant/search">Search</a></li>
+						<li><a href="#Menus">Menus</a></li>
+					</ul>
+				</div>
+
+			
+		</div>
+		</div>
+
+		<div class="my-form span2 item-txt">
+	<form method = 'GET' class="format-form">
+		<div class="legend"><em><strong>What are looking for?</strong></em></div>
+		<input type="text" name="q" value ="{{query|escape}}"/>
+		<lable for = 'b'> Browse By:</lable>
+		<select name = 'b'>
+		<option value='restaurant'>Restaurant Name</option>
+		<option value='cusine'>Restaurant Cusine</option>
+		</select>
+		
+		</br>
+		<lable for = 'c'>Cuisine</lable>
+		<select name = 'c'>
+		<option value=''></option>
+		{%if cuisine%}
+			{%for cu in cuisine%}
+			<option value='{{cu}}'>{{cu}}</option>
+			{%endfor%}
+		{%else%}
+			<option value='Cuisine'>No Cuisine</option>
+		{%endif%}
+		</select>
+	
+		<lable for = 'l'>Location</lable>
+		<select name = 'l'>
+		<option value=''></option>
+		{%if location%}
+				{%for lo in location%}
+			<option value='{{lo}}'>{{lo}}</option>
+			{%endfor%}
+		{%else%}
+		<option value='NoLocation'>No Location</option>
+		{%endif%}
+		</select>
+		<br/>
+		<input type="checkbox" name="d">Delivery
+		<input type="checkbox" name="p">Pick Up 
+		<br/><br/>
+				<input class="btn btn-large btn-success mysearchbtn2" type="submit" value="Search"></div>
+		</form>
+
+   <div class="span3 ">
+	{%if results%}
+		{% if query_browse|stringformat:"s" == "restaurant"  %}
+		
+			{%for item in results%}
+			<div class="hero-unit6 search-results-display " >
+				<div class="item-name"><ul class="listt item-txt"><li><h3><strong>{{item}}</strong></h3></li></div>
+					<div class="seeme"><ul class="listt search-imgs"><li  class="search-results-img"><img src= "{{item.i_image}}"/></ul></li></div>
+					<div class="info"><div><ul class="listt"><li><h4><em>{{item.i_restaurant.r_name}}</em></h4></ul></li></div>
+					<ul class="listt"><li>Delivery : {%if item.i_restaurant.r_delivery%}Yes{%else%}No{%endif%}</ul></li>
+					<ul class="listt"><li>Pick Up : {%if item.i_restaurant.r_pickup%}Yes{%else%}No{%endif%}</ul></li>
+					</div>
+					
+
+				
+				</ul>
+				</div>
+
+			{%endfor%}
+
+		{%endif%}
+
+		{% if query_browse|stringformat:"s" == "cusine" %}
+		
+		
+			{%for item in results%}
+			<div class="hero-unit6 search-results-display">
+				<ul class="listt item-txt"><li><h3><strong>{{item}}</strong></h3></li>
+					<div><ul class="listt search-imgs"><li  class="search-results-img"><img src= "{{item.i_image}}"/></ul></li></div>
+					<div><ul class="listt"><li><h4><em>{{item.i_cuisine.c_name}}</em></h4></ul></li></div>
+					<ul class="listt"><li>Delivery : {%if item.i_restaurant.r_delivery%}Yes{%else%}No{%endif%}</ul></li>
+					<ul class="listt"><li>Pick Up : {%if item.i_restaurant.r_pickup%}Yes{%else%}No{%endif%}</ul></li>
+					
+					
+
+				
+				</ul>
+				</div>
+
+			{%endfor%}
+
+
+		{%endif%}
+	{%else%}
+  <div class="item-txt"><h3><strong>Oops, no results found.</strong></h3></div>
+	{%endif%}
+
+</div>
+
+
+		
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="http://127.0.0.1:8000/restaurant/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

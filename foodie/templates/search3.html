@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+{%extends "base3.html"%}
+{%block specific-content%}
+
+<div class="span3">
+	{%if results%}
+		{% if query_browse|stringformat:"s" == "restaurant"  %}
+				
+			{%for item in results%}
+			<div class="hero-unit6 item-txt search-results-display " >
+				<div class="item-name"><ul class="listt item-txt"><a href="#" style:"color:green"><li><h3><strong>{{item}}</strong></h3></li></a></div>
+					<div class="seeme"><ul class="listt search-imgs"><li  class="search-results-img"><img src= "{{item.i_image}}"/></ul></li></div>
+					<div class="info"><div><ul class="listt"><li><h4><em>{{item.i_restaurant.r_name}}</em></h4></ul></li></div>
+					<ul class="listt"><li>Delivery : {%if item.i_restaurant.r_delivery%}Yes{%else%}No{%endif%}</ul></li>
+					<ul class="listt"><li>Takeaway : {%if item.i_restaurant.r_pickup%}Yes{%else%}No{%endif%}</ul></li>
+					</div>
+					
+
+				
+				</ul>
+				</div>
+
+			{%endfor%}
+
+		{%endif%}
+
+
+		{% if query_browse|stringformat:"s" == "cusine" %}
+		
+		
+				{%for item in results%}
+			<div class="hero-unit6 item-txt search-results-display " >
+				<div class="item-name"><ul class="listt item-txt"><li><h3><strong>{{item}}</strong></h3></li></div>
+					<div class="seeme"><ul class="listt search-imgs"><li  class="search-results-img"><img src= "{{item.i_image}}"/></ul></li></div>
+					<div class="info"><div><ul class="listt"><li><h4><em>{{item.i_cuisine.c_name}}</em></h4></ul></li></div>
+					<ul class="listt"><li>Delivery : {%if item.i_restaurant.r_delivery%}Yes{%else%}No{%endif%}</ul></li>
+					<ul class="listt"><li>Takeaway : {%if item.i_restaurant.r_pickup%}Yes{%else%}No{%endif%}</ul></li>
+					</div>
+					
+
+				
+				</ul>
+				</div>
+
+			{%endfor%}
+
+		{%endif%}
+	{%else%}
+  <div class="item-txt"><h3><strong>Oops, no results found.</strong></h3></div>
+	{%endif%}
+
+</div>
+
+{%endblock%}
+</html>

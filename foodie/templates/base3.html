@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/new.css" type="text/css" />
+
+
+<title>Welcome To Foodie || Index</title>
+</head>
+
+<body class="body3">
+
+	<div class="main-div-3">
+
+
+		<div class="nav-bar-3">
+			<div class="navbar  navbar-inverse">
+		<div class="navbar-inner mynavbar">
+			<button type="button" class="btn btn-navbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<div>
+					<ul class="nav"><li class="active"> <a href="http://127.0.0.1:8000/restaurant" class="brand">Foodie</a></li>
+						<li><a href="http://127.0.0.1:8000/restaurant/search">Search</a></li>
+						<li><a href="#Menus">Menus</a></li>
+					</ul>
+				</div>
+
+			
+		</div>
+		</div>
+
+
+		</div>
+
+
+		
+		<div class="search-bar-3  span2">
+
+
+				<div class="my-form item-txt">
+
+				</div>
+
+
+	<div class="moved-form">
+	<form method = 'GET' class="format-form" action="http://127.0.0.1:8000/restaurant/search">
+		<div class="legend i-text"><em><strong>What are looking for?</strong></em></div>
+		<input type="text" name="q" value ="{{query|escape}}"/>
+		<lable for = 'b' class="i-text"> Browse By:</lable>
+		<select name = 'b'>
+		<option value='restaurant'>Restaurant Name</option>
+		<option value='cusine'>Restaurant Cusine</option>
+		</select>
+		
+		</br>
+		<lable for = 'c' class="i-text">Cuisine</lable>
+		<select name = 'c'>
+		<option value=''></option>
+		{%if cuisine%}
+			{%for cu in cuisine%}
+			<option value='{{cu}}'>{{cu}}</option>
+			{%endfor%}
+		{%else%}
+			<option value='Cuisine'>No Cuisine</option>
+		{%endif%}
+		</select>
+	
+		<lable for = 'l' class="i-text">Location</lable>
+		<select name = 'l'>
+		<option value=''></option>
+		{%if location%}
+				{%for lo in location%}
+			<option value='{{lo}}'>{{lo}}</option>
+			{%endfor%}
+		{%else%}
+		<option value='NoLocation'>No Location</option>
+		{%endif%}
+		</select>
+		<br/>
+		<input type="checkbox" name="d" class="i-text">Delivery
+		<input type="checkbox" name="p" class="i-text">Pick Up 
+		<br/><br/>
+				<input class="btn btn-large btn-success mysearchbtn2" type="submit" value="Search"></div>
+		</form>
+	</div>
+
+
+    {%block specific-content%}
+
+
+	{%endblock%}
+
+		
+
+
+		
+
+	</div>
+
+</body>
+</html>

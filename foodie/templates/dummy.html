@@ -1,0 +1,125 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="http://127.0.0.1:8000/restaurant/static/css/new.css" type="text/css" />
+
+
+	<title>Welcome To Foodie || Index</title>
+</head>
+
+<body>
+
+	<div class="navbar  navbar-inverse">
+		<div class="navbar-inner mynavbar">
+			<button type="button" class="btn btn-navbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<a class="brand" href="#">Foodie</a>
+				<div>
+					<ul class="nav"><li > <a href="#">Home</a></li>
+						<li class="active"><a href="#Search">Search</a></li>
+						<li><a href="#Menus">Menus</a></li>
+					</ul>
+				</div>
+
+			
+		</div>
+	</div>
+
+<div class="hero-unit span3 search-bar">
+
+	<form method = 'GET'>
+		<lable for = 'b'> Browse By:</lable>
+		<select class ="span12" name = 'b'>
+		<option value='restaurant'>Restaurant Name</option>
+		<option value='cusine'>Restaurant Cusine</option>
+		</select>
+		<input class ="span12" type="text" name="q" value ="{{query|escape}}">
+		</br>
+		<lable class ="span12" for = 'c'>Cuisine</lable>
+		<select class ="span12" name = 'c'>
+		<option value=''></option>
+		{%if cuisine%}
+			{%for cu in cuisine%}
+			<option value='{{cu}}'>{{cu}}</option>
+			{%endfor%}
+		{%else%}
+			<option value='Cuisine'>No Cuisine</option>
+		{%endif%}
+		</select>
+	
+		<lable for = 'l'>Location</lable>
+		<select class ="span12" name = 'l'>
+		<option value=''></option>
+		{%if location%}
+				{%for lo in location%}
+			<option value='{{lo}}'>{{lo}}</option>
+			{%endfor%}
+		{%else%}
+		<option value='NoLocation'>No Location</option>
+		{%endif%}
+		</select>
+		<br/>
+		<input type="checkbox" name="d">Delivery
+		<input type="checkbox" name="p">Pick Up 
+		<br/><br/>
+				<input class="btn btn-large" type="submit" value="Search"></div>
+		</form>
+
+</div>
+<div class="hero-unit span3 search-results-display">
+
+{% if query_browse|stringformat:"s" == "restaurant"  %}
+		{%if results%}
+			{%for item in results%}
+				<ul><li>{{item}}</li>
+					
+					<ul><li>{{item.i_restaurant.r_name}}</ul></li>
+					<ul><li>Delivery : {%if item.i_restaurant.r_delivery%}Yes{%else%}No{%endif%}</ul></li>
+					<ul><li>Pick Up : {%if item.i_restaurant.r_pickup%}Yes{%else%}No{%endif%}</ul></li>
+					<ul><li>{{item.i_detail}}</ul></li>
+					<ul><li><img src= "{{item.i_image}}"/></ul></li>
+
+				
+				</ul>
+
+			{%endfor%}
+
+
+		{%endif%}
+		{%endif%}
+
+		{% if query_browse|stringformat:"s" == "cusine" %}
+		
+		{%if results%}
+			{%for item in results%}
+				<ul><li>{{item}}</li>
+					
+					<ul><li>{{item.i_cuisine.c_name}}</ul></li>
+				
+				</ul>
+
+			{%endfor%}
+
+
+		{%endif%}
+		{%endif%}
+
+				
+
+
+
+
+</div>
+
+
+<script src="http://127.0.0.1:8000/restaurant/static/js/bootstrap.min.js"></script>
+</body>
+</html>
